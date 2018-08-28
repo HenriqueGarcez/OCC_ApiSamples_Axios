@@ -25,7 +25,7 @@ const login = async () => {
             'grant_type': 'client_credentials'})
         })
     }catch(e){
-        console.log(e.message);
+        throw new Error(e.response.data.message);
     }
     }
 

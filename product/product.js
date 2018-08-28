@@ -1,46 +1,69 @@
-var axiConfig = require('./../utils/adminToken');
+const axiConfig = require('./../utils/adminToken'); // Require Admin token Controller
 
+// class Product { // Product as a Class -> Do it later!
+
+//         constructor(displayName, listPrice){
+//             this.displayName = displayName;
+//             this.listPrice = listPrice;
+//             this.desc = null;
+//         }
+
+// }
+
+// Create basic Product
 const createProduct = async () => {
-    try{
+    try {
         return await axiConfig({
             method: 'POST',
             rejectUnauthorized: false,
             url: `/ccadmin/v1/products`,
-            headers: {'X-CCAsset-Language': 'pt_BR'},
+            headers: { 'X-CCAsset-Language': 'pt_BR' },
             data: {
-                "catalogId": "cloudCatalog",
-                "categoryId": "rootCategory",
                 "properties": {
-                  "longDescription": "loooool",
-                  "nonreturnable": false,
-                  "displayName": "lol",
-                  "orderLimit": "100",
-                  "description": "lololoool",
-                  "height": "20",
-                  "salePrice": 80,
-                  "length": "20",
-                  "active": true,
-                  "weight": "20",
-                  "productNumber": "p18456",
-                  "taxCode": null,
-                  "arrivalDate": "2014-03-16T18:30:00.000Z",
-                  "width": "20",
-                  "shippingSurcharge": null,
-                  "listPrice": 100
+                    "displayName": "aquec1",
+                    "active": true,
+                    "listPrice": 55.0
+
                 }
             }
         })
-    }catch(e){
-        console.log(e.message);
-    }     
+    } catch (e) {
+        throw new Error(e.response.data.message);
     }
+}
 
-createProduct().then((response) => {
-    console.log(response.data);
-}).catch((e) => {
-    console.log(e);
-});
+// Get Product
+const getProduct = async (id) => {
+    try {
+        return await axiConfig({
+            method: 'GET',
+            rejectUnauthorized: false,
+            url: `/ccadmin/v1/products/${id}`,
+            headers: { 'X-CCAsset-Language': 'pt_BR' } // optional
+        })
+    } catch (e) {
+        throw new Error(e.response.data.message);
+    }
+}
+
+// Delete Product
+const deleteProduct = async (id) => {
+    try {
+        return await axiConfig({
+            method: 'DELETE',
+            rejectUnauthorized: false,
+            url: `/ccadmin/v1/products/${id}`,
+            headers: { 'X-CCAsset-Language': 'pt_BR' }
+        })
+    } catch (e) {
+        throw new Error(e.response.data.message);
+    }
+}
+
+
 
 module.exports = {
-    createProduct
+    createProduct,
+    getProduct,
+    deleteProduct
 }
