@@ -8,6 +8,7 @@ Nodejs examples to work with Oracle Commerce Cloud REST API using Axios module.
     $ git clone https://github.com/HenriqueGarcez/OCC_ApiSamples_Axios.git
     $ npm install
  #  Usage
+    Setup your keys on config/keys.js
     See /index.js for examples
  #  Test
     npm test
